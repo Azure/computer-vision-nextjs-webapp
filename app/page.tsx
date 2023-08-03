@@ -34,7 +34,7 @@ export default async function Home() {
           {vote && <RescindVoteBtn voteId={vote.id} />}
         </div>
       </div>
-      <div className="absolute bottom-4 left-4 flex items-center gap-2">
+      <div className="absolute bottom-4 left-4 hidden items-center gap-2 sm:flex">
         <SignOutButton />
         <ThemeSelector />
       </div>
