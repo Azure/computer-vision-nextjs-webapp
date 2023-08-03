@@ -41,23 +41,25 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  voteId        String?
 
   accounts Account[]
   sessions Session[]
-  Vote     Vote[]
+  Vote     Vote?
 }
 
 enum Animal {
-  Cat
-  Dog
+  cat
+  dog
 }
 
 model Vote {
-  id     String @id @default(cuid())
-  userId String
-  animal Animal
+  id           String @id @default(cuid())
+  userId       String @unique
+  animal       Animal
+  blobImageUrl String
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
 }
 
 model VerificationToken {

@@ -1,9 +1,9 @@
 type GetProps = {
-  method: "GET";
+  method: 'GET' | 'DELETE';
 };
 
 type OtherMethodsProps<Body> = {
-  method: "POST" | "PUT" | "DELETE" | "BATCH";
+  method: 'POST' | 'PUT' | 'BATCH';
   body: Body;
 };
 
@@ -12,15 +12,10 @@ type BaseProps<QueryParams> = {
   queryParams?: QueryParams;
 };
 
-type Props<QueryParams, Body> = BaseProps<QueryParams> &
-  (GetProps | OtherMethodsProps<Body>);
+type Props<QueryParams, Body> = BaseProps<QueryParams> & (GetProps | OtherMethodsProps<Body>);
 
-export const callBackend = async <
-  ReturnType,
-  Body = {},
-  QueryParams extends Record<string, string> = {}
->(
-  params: Props<QueryParams, Body>
+export const callBackend = async <ReturnType, Body = {}, QueryParams extends Record<string, string> = {}>(
+  params: Props<QueryParams, Body>,
 ) => {
   const { url, method, queryParams } = params;
 
@@ -28,12 +23,12 @@ export const callBackend = async <
 
   let res;
 
-  if (method === "GET") {
+  if (method === 'GET' || method === 'DELETE') {
     res = await fetch(urlWithParams, {
       method,
     });
   } else {
-    const { body } = params;
+    const { body } = params as any;
     res = await fetch(urlWithParams, {
       method,
       body: JSON.stringify(body),

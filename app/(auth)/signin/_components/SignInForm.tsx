@@ -6,19 +6,28 @@ import { InlineLink } from '@/_components/inputs/InlineLink';
 import { useToast } from '@/_hooks/useToast';
 import { signIn } from '@/_lib/client/signIn';
 import CheckCircleIcon from '@heroicons/react/24/outline/CheckCircleIcon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Image } from '@/_components/Image';
 import { signIn as nextAuthSignIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
 export function SignInForm() {
   const showToast = useToast();
+  const searchParams = useSearchParams();
 
   const [email, setEmail] = useState<string>();
-
   const [isErrorEmail, setIsErrorEmail] = useState<boolean>();
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEmailSent, setIsEmailSent] = useState<boolean>(false);
+
+  useEffect(() => {
+    const error = searchParams?.get('error');
+    if (error === 'OAuthAccountNotLinked') {
+      showToast({ type: 'danger', text: 'Email account already exists, please sign in with your email.' });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   const onSubmitEmail = async () => {
     if (!email) {
@@ -49,12 +58,12 @@ export function SignInForm() {
 
   const onSubmitSso = async () => {
     try {
-      await nextAuthSignIn('google');
+      await nextAuthSignIn('azure-ad-b2c');
     } catch (error) {
       console.error(error);
       showToast({
         type: 'danger',
-        text: String(error),
+        text: 'Something went wrong: ' + error,
       });
     }
   };
@@ -92,9 +101,9 @@ export function SignInForm() {
         <button className="btn-neutral btn w-full" onClick={() => onSubmitEmail()} disabled={isLoading}>
           {isLoading ? <Spinner /> : 'Sign in'}
         </button>
-        <button className="btn-outline btn w-full space-x-1" onClick={() => onSubmitSso()}>
-          <Image src="/google-logo.png" alt="google logo" />
-          <div>Sign in with Google</div>
+        <button className="btn-outline btn w-full" onClick={() => onSubmitSso()} disabled={isLoading}>
+          <Image src="/logos/microsoft.png" alt="microsoft logo" />
+          Sign in with Microsoft
         </button>
       </div>
 

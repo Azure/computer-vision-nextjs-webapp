@@ -1,6 +1,6 @@
-import { Pathname } from "@app/lib/types/api";
-import { User } from "@prisma/client";
-import { type DefaultSession } from "next-auth";
+import { Pathname } from '@app/lib/types/api';
+import { User } from '@prisma/client';
+import { type DefaultSession } from 'next-auth';
 
 declare global {
   namespace NodeJS {
@@ -19,11 +19,18 @@ declare global {
       AZURE_STORAGE_ACCOUNT_NAME: string;
       AZURE_STORAGE_ACCOUNT_KEY: string;
       AZURE_STORAGE_SAS_TOKEN: string;
+      AZURE_AD_CLIENT_ID: string;
+      AZURE_AD_CLIENT_SECRET: string;
+      AZURE_AD_TENANT_ID: string;
+      AZURE_AD_B2C_TENANT_NAME: string;
+      AZURE_AD_B2C_CLIENT_ID: string;
+      AZURE_AD_B2C_CLIENT_SECRET: string;
+      AZURE_AD_B2C_PRIMARY_USER_FLOW: string;
     }
   }
 }
 
-declare module "next-auth" {
+declare module 'next-auth' {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    * Defaults to default prisma schema, needs to be updated on User table schema changes
@@ -33,7 +40,7 @@ declare module "next-auth" {
   }
 }
 
-declare module "daisyui/src/theming/themes" {
+declare module 'daisyui/src/theming/themes' {
   const themes: any; // replace 'any' with actual type
   export default themes;
 }

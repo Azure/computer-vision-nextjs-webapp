@@ -1,3 +1,3 @@
-import { postVote } from "./_handlers/postVote";
+import { postVote } from './_handlers/postVote';
 
 export { postVote as POST };

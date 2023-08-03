@@ -13,7 +13,7 @@ export function Image({ src, size = 24, className, alt }: Props) {
       src={src}
       width={size}
       height={size}
-      className={`object-cover ${className}`}
+      className={className}
       alt={alt}
       referrerPolicy="no-referrer"
       unoptimized

@@ -1,18 +1,16 @@
-import { NextAuthProvider, ThemeProvider } from "./providers";
-import "@/globals.css";
+import { NextAuthProvider, ThemeProvider, ToastProvider } from './providers';
+import '@/globals.css';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider>
       <head></head>
       <body className="h-screen">
-        <main className="h-screen">
-          <NextAuthProvider>{children}</NextAuthProvider>
-        </main>
+        <ToastProvider>
+          <main className="h-screen">
+            <NextAuthProvider>{children}</NextAuthProvider>
+          </main>
+        </ToastProvider>
       </body>
     </ThemeProvider>
   );

@@ -7,15 +7,13 @@ import {
   StorageSharedKeyCredential,
 } from '@azure/storage-blob';
 
-export const generateAzureStorageSasToken = async (): Promise<{
+export const generateAzureStorageSasToken = async (
+  containerName: string,
+): Promise<{
   sasToken?: string;
   storageUri: string;
 }> => {
-  const {
-    AZURE_STORAGE_ACCOUNT_NAME: accountName,
-    AZURE_STORAGE_ACCOUNT_KEY: accountKey,
-    AZURE_STORAGE_CONTAINER_NAME: containerName,
-  } = process.env;
+  const { AZURE_STORAGE_ACCOUNT_NAME: accountName, AZURE_STORAGE_ACCOUNT_KEY: accountKey } = process.env;
 
   const storageUri = `https://${accountName}.blob.core.windows.net/${containerName}`;
 

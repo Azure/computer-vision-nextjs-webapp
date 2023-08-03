@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { SessionProvider } from "next-auth/react";
-import { useTheme } from "./_lib/client/theme";
-import { createContext, useState } from "react";
-import { ToastOptions, Toast } from "./_components/Toast";
+import { SessionProvider } from 'next-auth/react';
+import { useTheme } from './_lib/client/theme';
+import { createContext, useState } from 'react';
+import { ToastOptions, Toast } from './_components/Toast';
 
 type Props = {
   children?: React.ReactNode;
@@ -17,7 +17,7 @@ export const ThemeProvider = ({ children }: Props) => {
   const { theme } = useTheme();
 
   return (
-    <html lang="en" data-theme={theme || "autumn"}>
+    <html lang="en" data-theme={theme || 'autumn'}>
       {children}
     </html>
   );
@@ -41,9 +41,7 @@ export const ToastProvider = ({ children }: Props) => {
 
   return (
     <ToastContext.Provider value={{ showToast }}>
-      {toastOptions && (
-        <Toast type={toastOptions.type} text={toastOptions.text} />
-      )}
+      {toastOptions && <Toast type={toastOptions.type} text={toastOptions.text} />}
       {children}
     </ToastContext.Provider>
   );
