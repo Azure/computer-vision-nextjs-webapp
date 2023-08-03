@@ -3,7 +3,6 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { ReactNode, useMemo, useRef, useState } from 'react';
 import { Image } from '../Image';
-import { Avatar } from '../../(app)/_components/Avatar';
 import classNames from 'classnames';
 
 type DropdownPosition = 'dropdown-end' | 'dropdown-top' | 'dropdown-bottom' | 'dropdown-left' | 'dropdown-right';
