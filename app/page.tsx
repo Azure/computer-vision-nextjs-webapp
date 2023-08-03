@@ -5,6 +5,8 @@ import { User } from '@prisma/client';
 import { VoteUploader } from './_components/VoteUploader';
 import prisma from '@/_lib/server/prismadb';
 import { RescindVoteBtn } from './_components/RescindVoteBtn';
+import { SignOutButton } from './_components/SignOutButton';
+import { ThemeSelector } from './_components/ThemeSelector';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -31,6 +33,10 @@ export default async function Home() {
           {vote && <div className="text-xl">You have voted for &quot;{vote.animal}&quot;</div>}
           {vote && <RescindVoteBtn voteId={vote.id} />}
         </div>
+      </div>
+      <div className="absolute bottom-4 left-4 flex items-center gap-2">
+        <SignOutButton />
+        <ThemeSelector />
       </div>
     </div>
   );
