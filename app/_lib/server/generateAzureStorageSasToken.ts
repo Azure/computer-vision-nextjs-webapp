@@ -26,7 +26,7 @@ export const generateAzureStorageSasToken = async (
       permissions: AccountSASPermissions.parse('rwdlacupi'), // permissions
       protocol: SASProtocol.Https,
       startsOn: new Date(),
-      expiresOn: new Date(new Date().valueOf() + 400 * 60 * 1000), // 400 minutes
+      expiresOn: new Date(new Date().valueOf() + 72 * 60 * 60 * 1000), // 3 days
     };
 
     const sasToken = generateAccountSASQueryParameters(sasOptions, sharedKeyCredential).toString();
