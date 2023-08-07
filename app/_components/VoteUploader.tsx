@@ -12,10 +12,11 @@ import { useRouter } from 'next/navigation';
 import { v4 as uuid } from 'uuid';
 
 type Props = {
+  userId: string;
   imageUrl?: string;
 };
 
-export function VoteUploader({ imageUrl }: Props) {
+export function VoteUploader({ imageUrl, userId }: Props) {
   const showToast = useToast();
   const router = useRouter();
 
@@ -46,6 +47,7 @@ export function VoteUploader({ imageUrl }: Props) {
         method: 'POST',
         url: '/api/vote',
         body: {
+          userId,
           blobUrl,
         },
       });

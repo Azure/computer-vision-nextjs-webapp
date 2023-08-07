@@ -1,11 +1,9 @@
-import { NextRequest } from "next/server";
-import { z } from "zod";
-import { getServerSession } from "next-auth";
-import { Account, User } from "@prisma/client";
-import prisma from "@/_lib/server/prismadb";
-import { generateApiResponse } from "@/api/_lib/generateApiResponse";
-import { logErrorMessage } from "@/api/_lib/generateErrorMessage";
-import { authOptions } from "@/api/auth/[...nextauth]/route";
+import { NextRequest } from 'next/server';
+import { z } from 'zod';
+import { User } from '@prisma/client';
+import prisma from '@/_lib/server/prismadb';
+import { generateApiResponse } from '@/api/_lib/generateApiResponse';
+import { logErrorMessage } from '@/api/_lib/generateErrorMessage';
 
 const bodySchema = z.object({
   firstName: z.string(),
@@ -17,22 +15,12 @@ export type ApiSignUpBody = z.infer<typeof bodySchema>;
 
 export type ApiSignUpResp = {
   user: User;
-  account: Account;
 };
 
 export const signUp = async (req: NextRequest) => {
   const body = await req.json();
 
   try {
-    const session = await getServerSession(authOptions);
-
-    if (session?.user) {
-      return generateApiResponse({
-        status: 500,
-        error: "Already signed in.",
-      });
-    }
-
     const { firstName, lastName, email } = bodySchema.parse(body);
 
     const existingUser = await prisma.user.findUnique({
@@ -44,7 +32,7 @@ export const signUp = async (req: NextRequest) => {
     if (existingUser) {
       return generateApiResponse({
         status: 400,
-        error: "Email already registered. Please sign in.",
+        error: 'Email already registered. Please sign in.',
       });
     }
 
@@ -56,22 +44,13 @@ export const signUp = async (req: NextRequest) => {
       },
     });
 
-    const account = await prisma.account.create({
-      data: {
-        userId: user.id,
-        provider: "email",
-        type: "email",
-        providerAccountId: email,
-      },
-    });
-
     return generateApiResponse<ApiSignUpResp>({
       status: 200,
-      data: { user, account },
+      data: { user },
     });
   } catch (error) {
     const errorMessage = logErrorMessage({
-      message: "Error signing up.",
+      message: 'Error signing up.',
       error,
     });
 

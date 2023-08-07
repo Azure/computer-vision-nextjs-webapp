@@ -1,14 +1,13 @@
 import { NextRequest } from 'next/server';
 import { z } from 'zod';
-import { getServerSession } from 'next-auth';
 import { Vote } from '@prisma/client';
 import prisma from '@/_lib/server/prismadb';
 import { generateApiResponse } from '@/api/_lib/generateApiResponse';
 import { logErrorMessage } from '@/api/_lib/generateErrorMessage';
-import { authOptions } from '@/api/auth/[...nextauth]/route';
 import { dogOrCat } from '../_lib/dogOrCat';
 
 const bodySchema = z.object({
+  userId: z.string(),
   blobUrl: z.string(),
 });
 
@@ -22,16 +21,7 @@ export const postVote = async (req: NextRequest) => {
   const body = await req.json();
 
   try {
-    const session = await getServerSession(authOptions);
-
-    if (!session?.user) {
-      return generateApiResponse({
-        status: 401,
-        error: 'Unauthenticated.',
-      });
-    }
-
-    const { blobUrl } = bodySchema.parse(body);
+    const { blobUrl, userId } = bodySchema.parse(body);
 
     const animal = await dogOrCat(blobUrl);
 
@@ -44,7 +34,7 @@ export const postVote = async (req: NextRequest) => {
 
     const vote = await prisma.vote.create({
       data: {
-        userId: session.user.id,
+        userId,
         animal,
         blobImageUrl: blobUrl,
       },

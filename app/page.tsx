@@ -3,14 +3,34 @@ import { VoteUploader } from './_components/VoteUploader';
 import { RescindVoteBtn } from './_components/RescindVoteBtn';
 import { SignOutButton } from './_components/SignOutButton';
 import { ThemeSelector } from './_components/ThemeSelector';
-import { getServerUser } from './_lib/server/getServerUser';
+import { redirect } from 'next/navigation';
 
-export default async function Home() {
-  const user = await getServerUser();
+type Props = {
+  searchParams: { uid?: string };
+};
+
+export default async function Home({ searchParams: { uid } }: Props) {
+  if (!uid) {
+    redirect('/signup');
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: uid,
+    },
+  });
+
+  if (!user) {
+    return (
+      <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 text-lg">
+        <div>No user found.</div> <SignOutButton />
+      </div>
+    );
+  }
 
   const vote = await prisma.vote.findUnique({
     where: {
-      userId: user.id,
+      userId: uid,
     },
   });
 
@@ -21,8 +41,8 @@ export default async function Home() {
           <div className="text-4xl font-light">Hi {user.firstName}.</div>
           <div className="text-xl">Vote for Cat (or Dog).</div>
           <div className="text-xl">Vote by uploading an image of a cat or dog.</div>
-          <VoteUploader imageUrl={vote?.blobImageUrl} />
-          {vote && <div className="text-xl">You have voted for &quot;{vote.animal}&quot;</div>}
+          <VoteUploader imageUrl={vote?.blobImageUrl} userId={user.id} />
+          {vote && <div className="text-xl">You have voted for &quot;{vote.animal}&quot;.</div>}
           {vote && <RescindVoteBtn voteId={vote.id} />}
         </div>
       </div>

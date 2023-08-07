@@ -7,9 +7,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head></head>
       <body className="h-screen">
         <ToastProvider>
-          <main className="h-screen">
-            <NextAuthProvider>{children}</NextAuthProvider>
-          </main>
+          <main className="h-screen">{children}</main>
         </ToastProvider>
       </body>
     </ThemeProvider>

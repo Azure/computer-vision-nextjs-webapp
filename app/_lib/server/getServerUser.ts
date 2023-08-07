@@ -1,14 +1,16 @@
-import { authOptions } from '../../api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
 import { User } from '@prisma/client';
+import prisma from '@/_lib/server/prismadb';
 
-export const getServerUser = async (): Promise<User> => {
-  const session = await getServerSession(authOptions);
+export const getServerUser = async (): Promise<User | null> => {
+  const email = window?.localStorage.getItem('cn-scenario-email');
 
-  if (!session || !session.user) {
-    redirect('/signup');
-  }
+  if (!email) return null;
 
-  return session.user as User;
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  return user;
 };

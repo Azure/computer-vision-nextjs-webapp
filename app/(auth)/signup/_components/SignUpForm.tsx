@@ -1,59 +1,43 @@
 'use client';
 
 import { Spinner } from '@/_components/Spinner';
-import { ToastType } from '@/_components/Toast';
 import { Input } from '@/_components/inputs/Input';
 import { useToast } from '@/_hooks/useToast';
 import { ApiSignUpBody, ApiSignUpResp } from '@/api/signup/_handlers/signUp';
-import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { InlineLink } from '@/_components/inputs/InlineLink';
-import { Image } from '@/_components/Image';
-import { signIn as nextAuthSignIn } from 'next-auth/react';
 import { signIn } from '@/_lib/client/signIn';
 import { callBackend } from '@/_lib/server/callBackend';
+import { useRouter } from 'next/navigation';
+import { useRedirectIfSignedIn } from '@/_hooks/useRedirectIfSignedIn';
 
 export function SignupForm() {
+  // Hooks
   const showToast = useToast();
+  const router = useRouter();
+  useRedirectIfSignedIn();
 
-  // Form data
+  // Form state
   const [email, setEmail] = useState<string>();
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Form errors
   const [isErrorEmail, setIsErrorEmail] = useState<boolean>();
   const [isErrorFirstName, setIsErrorFirstName] = useState<boolean>();
   const [isErrorLastName, setIsErrorLastName] = useState<boolean>();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isSignedUp, setIsSignedUp] = useState<boolean>();
-
   const onSubmitEmail = async () => {
     try {
-      if (isSignedUp || isLoading) {
-        return;
-      }
-
       setIsLoading(true);
-      const [type, text] = ['danger' as ToastType, 'Please fill in all required fields.'];
 
-      if (!email) {
-        setIsErrorEmail(true);
-        showToast({ type, text });
-      }
-
-      if (!firstName) {
-        setIsErrorFirstName(true);
-        showToast({ type, text });
-      }
-
-      if (!lastName) {
-        setIsErrorLastName(true);
-        showToast({ type, text });
-      }
+      if (!email) setIsErrorEmail(true);
+      if (!firstName) setIsErrorFirstName(true);
+      if (!lastName) setIsErrorLastName(true);
 
       if (!email || !firstName || !lastName) {
+        showToast({ type: 'danger', text: 'Please fill in all required fields.' });
         return;
       }
 
@@ -67,51 +51,19 @@ export function SignupForm() {
         },
       });
 
-      showToast({ type: 'success', text: 'Success!' });
+      const userId = await signIn({ email });
 
-      await signIn({ email });
-
-      setIsSignedUp(true);
+      router.push(`/?uid=${userId}`);
     } catch (error) {
       console.error(error);
       showToast({
         type: 'danger',
         text: 'Something went wrong: ' + error,
       });
-    }
 
-    setIsLoading(false);
-  };
-
-  const onSubmitSso = async () => {
-    try {
-      await nextAuthSignIn('azure-ad');
-    } catch (error) {
-      console.error(error);
-      showToast({
-        type: 'danger',
-        text: 'Something went wrong: ' + error,
-      });
+      setIsLoading(false);
     }
   };
-
-  if (isSignedUp) {
-    return (
-      <div className="mt-3 flex w-full flex-col items-center gap-3 px-5">
-        <CheckCircleIcon height={80} className="text-success" />
-        <div className="space-y-1">
-          <div className="w-full text-xl font-semibold">Check your email</div>
-          <div className="text-md">
-            Please check your email inbox (make sure to check your junk folder) and click on the provided link to sign
-            in. If you don&apos;t recieve an email, {/* TODO: Debounce resend */}
-            <InlineLink href="#" onClick={() => signIn({ email: email! })}>
-              click here to resend.
-            </InlineLink>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div
@@ -122,10 +74,6 @@ export function SignupForm() {
         }
       }}
     >
-      <div className="mb-7 mt-3 text-sm">
-        Note: Due to safelink protection and tenant restrictions, work emails are not guaranteed to work. Please use a
-        personal account to sign in with Microsoft or via email.
-      </div>
       <div className="space-y-6">
         <Input label="First name" isError={isErrorFirstName} value={firstName} onChange={setFirstName} required />
         <Input label="Last name" isError={isErrorLastName} value={lastName} onChange={setLastName} required />
@@ -133,12 +81,8 @@ export function SignupForm() {
       </div>
 
       <div className="space-y-3 pb-2 pt-4">
-        <button className="btn-neutral btn w-full" onClick={() => onSubmitEmail()} disabled={isLoading}>
+        <button className="btn btn-neutral w-full" onClick={() => onSubmitEmail()} disabled={isLoading}>
           {isLoading ? <Spinner /> : 'Sign up'}
-        </button>
-        <button className="btn-outline btn w-full" onClick={() => onSubmitSso()} disabled={isLoading}>
-          <Image src="/logos/microsoft.png" alt="microsoft logo" />
-          Sign in with Microsoft
         </button>
       </div>
 

@@ -1,39 +1,37 @@
 // @ts-ignore
-import daisyUiColors from "daisyui/src/theming/themes";
-import { getLocalStorage, setLocalStorage } from "./storage";
-import { useEffect, useState } from "react";
+import daisyUiColors from 'daisyui/src/theming/themes';
+import { useEffect, useState } from 'react';
 
-const getTheme = () => getLocalStorage("cn-scenario-theme") || "light";
+const getTheme = () => localStorage.getItem('cn-scenario-theme') || 'autumn';
 
 export const setTheme = (newTheme: string) => {
-  setLocalStorage("cn-scenario-theme", newTheme);
-  window.dispatchEvent(new Event("storage"));
-  document.querySelector("html")!.setAttribute("data-theme", newTheme);
+  localStorage.setItem('cn-scenario-theme', newTheme);
+  dispatchEvent(new Event('storage'));
+  document.querySelector('html')!.setAttribute('data-theme', newTheme);
 };
 
 type ThemeColors = {
-  "color-scheme": string;
+  'color-scheme': string;
   primary: string;
   secondary: string;
   accent: string;
-  "base-100": string;
-  "base-200": string;
-  "base-300": string;
+  'base-100': string;
+  'base-200': string;
+  'base-300': string;
   neutral: string;
-  "neutral-focus": string;
+  'neutral-focus': string;
   info: string;
   success: string;
   warning: string;
   error: string;
 };
 
-const getThemeColors = (): ThemeColors =>
-  daisyUiColors[`[data-theme=${getTheme()}]`];
+const getThemeColors = (): ThemeColors => daisyUiColors[`[data-theme=${getTheme()}]`];
 
 export const useTheme = () => {
-  const lightThemeColors = daisyUiColors[`[data-theme=light]`];
-  const [theme, _setTheme] = useState<string>("");
-  const [themeColors, setThemeColors] = useState<ThemeColors>(lightThemeColors);
+  const autumnThemeColors = daisyUiColors[`[data-theme=autumn]`];
+  const [theme, _setTheme] = useState<string>('');
+  const [themeColors, setThemeColors] = useState<ThemeColors>(autumnThemeColors);
 
   useEffect(() => {
     // Only access local storage on component mount, else risk undefined
@@ -45,10 +43,10 @@ export const useTheme = () => {
       setThemeColors(getThemeColors());
     };
 
-    window.addEventListener("storage", onStorage);
+    addEventListener('storage', onStorage);
 
     return () => {
-      window.removeEventListener("storage", onStorage);
+      removeEventListener('storage', onStorage);
     };
   }, []);
 
