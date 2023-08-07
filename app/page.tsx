@@ -1,20 +1,12 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/route';
-import { redirect } from 'next/navigation';
-import { User } from '@prisma/client';
-import { VoteUploader } from './_components/VoteUploader';
 import prisma from '@/_lib/server/prismadb';
+import { VoteUploader } from './_components/VoteUploader';
 import { RescindVoteBtn } from './_components/RescindVoteBtn';
 import { SignOutButton } from './_components/SignOutButton';
 import { ThemeSelector } from './_components/ThemeSelector';
+import { getServerUser } from './_lib/server/getServerUser';
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-  const user = session?.user as User;
-
-  if (!user) {
-    redirect('/signup');
-  }
+  const user = await getServerUser();
 
   const vote = await prisma.vote.findUnique({
     where: {
