@@ -43,7 +43,7 @@ export MY_CONTAINER_APP_ENV_NAME=mycontainerappenv
 
 ## Login to Azure using the CLI
 
-In order to run commands against Azure using [the CLI ](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)you need to login. This is done, very simply, though the `az login` command:
+In order to run commands against Azure using [the CLI ](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)you need to login. This is done, though the `az login` command:
 
 ## Create a resource group
 
@@ -69,7 +69,7 @@ export STORAGE_ACCOUNT_KEY=$(az storage account keys list --account-name $MY_STO
 
 ## Create a container in the storage account
 
-Run the following command create an `images` container in the storage account we just created.
+Run the following command to create an `images` container in the storage account we just created. User uploaded images will be stored as blobs in this container.
 
 ```bash
 az storage container create --name images --account-name $MY_STORAGE_ACCOUNT_NAME --account-key $STORAGE_ACCOUNT_KEY --public-access blob
@@ -127,7 +127,7 @@ az cognitiveservices account create \
     --yes
 ```
 
-To access our computer vision resource, we need both the endpoint to the resource and the key. With the Azure CLI, we have access to two `az cognitiveservices account` commands: `show` and `keys list`, which give us what we need.
+To access our computer vision resource, we need both the endpoint and the key. With the Azure CLI, we have access to two `az cognitiveservices account` commands: `show` and `keys list`, which give us what we need.
 
 ```bash
 export COMPUTER_VISION_ENDPOINT=$(az cognitiveservices account show --name $MY_COMPUTER_VISION_NAME --resource-group $MY_RESOURCE_GROUP_NAME --query "properties.endpoint" --output tsv)
@@ -136,7 +136,7 @@ export COMPUTER_VISION_KEY=$(az cognitiveservices account keys list --name $MY_C
 
 ## Set environment variables for the code
 
-The Next.js sample code provided relies on a `.env` file with the environment variables for all the resources we just created. We can use a simple command to put them into a file:
+The Next.js sample code provided relies on a `.env` file that includes the environment variables for all the resources we just created. We can use a simple command to put them into a file.
 
 ```bash
 cat > .env <<EOL
@@ -181,7 +181,7 @@ By default, our database is configured to allow traffic from an allowlist of IP 
 export CONTAINER_APP_IP=$(az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE_GROUP_NAME --query "properties.outboundIpAddresses[0]" --output tsv)
 ```
 
-We can now add this IP as a firewall rule with another command:
+We can now add this IP as a firewall rule with this command:
 
 ```bash
 az postgres flexible-server firewall-rule create \
@@ -200,14 +200,14 @@ Web browsers implement a security restriction known as same-origin policy that p
 export CONTAINER_APP_URL=https://$(az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE_GROUP_NAME --query "properties.configuration.ingress.fqdn" --output tsv)
 ```
 
-Next, we can add a CORS rule with another command. Let's break down the different parts of this command.
+Next, we're ready to add a CORS rule with the following command. Let's break down the different parts of this command.
 
-- We are specifying the blob service to add the rule to.
+- We are specifying blob service as the storage type to add the rule to.
 - We are allowing all operations to be performed.
 - We are allowing only the container app URL we just saved.
-- We are allowing all HTTP headers from this domain.
+- We are allowing all HTTP headers from this URL.
 - Max age is the amount of time, in seconds, that a browser should cache the preflight response for a specific request.
-- We are passing the storage account name and key from earlier
+- We are passing the storage account name and key from earlier.
 
 ```bash
 az storage cors add \
@@ -220,7 +220,7 @@ az storage cors add \
   --account-key $STORAGE_ACCOUNT_KEY
 ```
 
-We're done! Feel free to access the newly deployed web app in your browser using the $CONTAINER_APP_URL environment variable.
+That's it! Feel free to access the newly deployed web app in your browser using the $CONTAINER_APP_URL environment variable.
 
 ## Next Steps
 
