@@ -5,27 +5,11 @@ import { type DefaultSession } from 'next-auth';
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      ENVIRONMENT: string;
-      BASE_URL: string;
-      DATABASE_URL: string;
-      NEXTAUTH_SECRET: string;
-      SENDGRID_FROM_EMAIL: string;
-      SENDGRID_SMTP_USER: string;
-      SENDGRID_SMTP_KEY: string;
-      SENDGRID_SMTP_HOST: string;
-      SENDGRID_SMTP_PORT: string;
+      AZURE_DATABASE_URL: string;
       AZURE_COMPUTER_VISION_KEY: string;
       AZURE_COMPUTER_VISION_ENDPOINT: string;
       AZURE_STORAGE_ACCOUNT_NAME: string;
       AZURE_STORAGE_ACCOUNT_KEY: string;
-      AZURE_STORAGE_SAS_TOKEN: string;
-      AZURE_AD_CLIENT_ID: string;
-      AZURE_AD_CLIENT_SECRET: string;
-      AZURE_AD_TENANT_ID: string;
-      AZURE_AD_B2C_TENANT_NAME: string;
-      AZURE_AD_B2C_CLIENT_ID: string;
-      AZURE_AD_B2C_CLIENT_SECRET: string;
-      AZURE_AD_B2C_PRIMARY_USER_FLOW: string;
     }
   }
 }

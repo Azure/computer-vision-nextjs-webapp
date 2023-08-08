@@ -62,10 +62,10 @@ az containerapp up \
   --source . \
   --env-vars \
     DATABASE_URL=$DATABASE_URL \
-    AZURE_COMPUTER_VISION_KEY=$COMPUTER_VISION_KEY \
-    AZURE_COMPUTER_VISION_ENDPOINT=$COMPUTER_VISION_ENDPOINT \
-    AZURE_STORAGE_ACCOUNT_NAME=$MY_STORAGE_ACCOUNT_NAME \
-    AZURE_STORAGE_ACCOUNT_KEY=$STORAGE_ACCOUNT_KEY
+    COMPUTER_VISION_KEY=$COMPUTER_VISION_KEY \
+    COMPUTER_VISION_ENDPOINT=$COMPUTER_VISION_ENDPOINT \
+    STORAGE_ACCOUNT_NAME=$MY_STORAGE_ACCOUNT_NAME \
+    STORAGE_ACCOUNT_KEY=$STORAGE_ACCOUNT_KEY
 
 # Container app IP address
 export CONTAINER_APP_IP=$(az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE_GROUP_NAME --query "properties.outboundIpAddresses[0]" --output tsv)
@@ -77,4 +77,4 @@ az postgres flexible-server firewall-rule create \
     --rule-name allow-container-app \
     --start-ip-address $CONTAINER_APP_IP \
     --end-ip-address $CONTAINER_APP_IP
-  
+    
