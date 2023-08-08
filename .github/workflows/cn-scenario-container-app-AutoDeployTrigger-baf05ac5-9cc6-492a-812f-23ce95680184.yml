@@ -1,0 +1,42 @@
+name: Trigger auto deployment for cn-scenario-container-app
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/cn-scenario-container-app-AutoDeployTrigger-baf05ac5-9cc6-492a-812f-23ce95680184.yml'
+
+  # Allow mannually trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.CNSCENARIOCONTAINERAPP_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: ca937305a206acr.azurecr.io
+          registryUsername: ${{ secrets.CNSCENARIOCONTAINERAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.CNSCENARIOCONTAINERAPP_REGISTRY_PASSWORD }}
+          containerAppName: cn-scenario-container-app
+          resourceGroup: azure-core
+          imageToBuild: ca937305a206acr.azurecr.io/cn-scenario-container-app:${{ github.sha }}
+          dockerfilePath: Dockerfile
+
+     
+
