@@ -52,6 +52,15 @@ export COMPUTER_VISION_ENDPOINT=$(az cognitiveservices account show --name $MY_C
 # Computer vision key
 export COMPUTER_VISION_KEY=$(az cognitiveservices account keys list --name $MY_COMPUTER_VISION_NAME --resource-group $MY_RESOURCE_GROUP_NAME --query "key1" --output tsv)
 
+# Set environment variable for Next.js
+cat > .env <<EOL
+AZURE_DATABASE_URL=${DATABASE_URL}
+AZURE_COMPUTER_VISION_KEY=${COMPUTER_VISION_KEY}
+AZURE_COMPUTER_VISION_ENDPOINT=${COMPUTER_VISION_ENDPOINT}
+AZURE_STORAGE_ACCOUNT_NAME=${MY_STORAGE_ACCOUNT_NAME}
+AZURE_STORAGE_ACCOUNT_KEY=${STORAGE_ACCOUNT_KEY}
+EOL
+
 # Container app
 az containerapp up \
   --name $MY_CONTAINER_APP_NAME \
@@ -59,16 +68,13 @@ az containerapp up \
   --location $MY_LOCATION \
   --environment $MY_CONTAINER_APP_ENV_NAME \
   --context-path . \
-  --source . \
-  --env-vars \
-    DATABASE_URL=$DATABASE_URL \
-    COMPUTER_VISION_KEY=$COMPUTER_VISION_KEY \
-    COMPUTER_VISION_ENDPOINT=$COMPUTER_VISION_ENDPOINT \
-    STORAGE_ACCOUNT_NAME=$MY_STORAGE_ACCOUNT_NAME \
-    STORAGE_ACCOUNT_KEY=$STORAGE_ACCOUNT_KEY
+  --source .
 
 # Container app IP address
 export CONTAINER_APP_IP=$(az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE_GROUP_NAME --query "properties.outboundIpAddresses[0]" --output tsv)
+
+# Container endpoint
+export CONTAINER_APP_URL=https://$(az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE_GROUP_NAME --query "properties.configuration.ingress.fqdn" --output tsv)
 
 # Allow container app IP to access database
 az postgres flexible-server firewall-rule create \
@@ -77,4 +83,13 @@ az postgres flexible-server firewall-rule create \
     --rule-name allow-container-app \
     --start-ip-address $CONTAINER_APP_IP \
     --end-ip-address $CONTAINER_APP_IP
-    
+
+# Add container endpoint to allowed CORS origin for storage account
+az storage cors add \
+  --services b \
+  --methods DELETE GET HEAD MERGE OPTIONS POST PUT \
+  --origins $CONTAINER_APP_URL \
+  --allowed-headers '*' \
+  --max-age 3600 \
+  --account-name $MY_STORAGE_ACCOUNT_NAME \
+  --account-key $STORAGE_ACCOUNT_KEY
