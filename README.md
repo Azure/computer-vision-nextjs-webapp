@@ -5,7 +5,7 @@ In this guide, we'll be walking through deploying the necessary resources for a 
 * **Azure Storage Account** to store the images
 * **Azure Database for PostgreSQL** to store users and votes
 * **Azure Computer Vision** to analyze the images for cats or dogs
-* **Azure Container App** to host our code
+* **Azure Container App** to deploy our code
 
 ## Clone the sample repository
 
@@ -23,7 +23,7 @@ git clone https://github.com/ralphr123/cn-app.git
 git clone git@github.com:ralphr123/cn-app.git
 ```
 
-Once cloned, navigate to the root of the repo in your terminal. To preserve saved environment variables, it's important that this terminal stay open for the duration of the deployment.
+Once cloned, navigate to the root of the repo in your terminal. To preserve saved environment variables, it's important that this terminal window stay open for the duration of the deployment.
 
 ## Define Environment Variables
 
