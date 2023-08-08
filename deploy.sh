@@ -9,6 +9,9 @@ export MY_COMPUTER_VISION_NAME=mycomputervisionname
 export MY_CONTAINER_APP_NAME=mycontainerapp
 export MY_CONTAINER_APP_ENV_NAME=mycontainerappenv
 
+# Resource group
+az group create --name $MY_RESOURCE_GROUP_NAME --location $MY_LOCATION
+
 # Storage account
 az storage account create --name $MY_STORAGE_ACCOUNT_NAME --resource-group $MY_RESOURCE_GROUP_NAME --location $MY_LOCATION --sku Standard_LRS
 
@@ -34,9 +37,6 @@ az postgres flexible-server create \
 # PSQL database connection string
 export DATABASE_URL="postgres://$MY_DATABASE_USERNAME:$MY_DATABASE_PASSWORD@$MY_DATABASE_NAME.postgres.database.azure.com/postgres"
 
-# Prisma schema push
-npx prisma db push
-
 # Computer vision
 az cognitiveservices account create \
     --name $MY_COMPUTER_VISION_NAME \
@@ -60,6 +60,9 @@ AZURE_COMPUTER_VISION_ENDPOINT=${COMPUTER_VISION_ENDPOINT}
 AZURE_STORAGE_ACCOUNT_NAME=${MY_STORAGE_ACCOUNT_NAME}
 AZURE_STORAGE_ACCOUNT_KEY=${STORAGE_ACCOUNT_KEY}
 EOL
+
+# Prisma schema push to our db
+npx prisma db push
 
 # Container app
 az containerapp up \
