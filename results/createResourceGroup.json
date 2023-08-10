@@ -1,0 +1,11 @@
+{
+  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME",
+  "location": "$MY_LOCATION",
+  "managedBy": null,
+  "name": "$MY_RESOURCE_GROUP_NAME",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}

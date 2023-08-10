@@ -23,7 +23,7 @@ git clone https://github.com/ralphr123/cn-app.git
 git clone git@github.com:ralphr123/cn-app.git
 ```
 
-Once cloned, navigate to the root of the repo in your terminal. To preserve saved environment variables, it's important that this terminal window stay open for the duration of the deployment.
+Once cloned, navigate to the root of the repo in your terminal. To preserve saved environment variables, it's important that this terminal window stays open for the duration of the deployment.
 
 ## Define Environment Variables
 
