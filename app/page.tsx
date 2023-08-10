@@ -69,23 +69,23 @@ export default async function Home({ searchParams: { uid } }: Props) {
           <div className="space-y-3">
             <div className="text-xl font-semibold">Vote distribution:</div>
             <div>
-              Number of dog votes: {numDogVotes} ({percentDogVotes}%)
+              Number of cat votes: {numCatVotes} ({percentCatVotes}%)
             </div>
             <div>
-              Number of cat votes: {numCatVotes} ({percentCatVotes}%)
+              Number of dog votes: {numDogVotes} ({percentDogVotes}%)
             </div>
             <div className="!mt-5 flex w-full overflow-hidden rounded-3xl">
               <div
-                className="flex h-10 items-center justify-center overflow-hidden bg-blue-400"
+                className="flex h-10 items-center justify-center overflow-hidden bg-blue-400 text-sm"
                 style={{ width: `${percentCatVotes}%` }}
               >
-                Cat: {percentCatVotes}%
+                {percentCatVotes}%
               </div>
               <div
-                className="flex h-10 items-center justify-center overflow-hidden bg-orange-400"
+                className="flex h-10 items-center justify-center overflow-hidden bg-orange-400 text-sm"
                 style={{ width: `${percentDogVotes}%` }}
               >
-                Dog: {percentDogVotes}%
+                {percentDogVotes}%
               </div>
             </div>
           </div>
