@@ -21,20 +21,6 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 
-# Define build args
-ARG DATABASE_URL
-ARG COMPUTER_VISION_KEY
-ARG COMPUTER_VISION_ENDPOINT
-ARG MY_STORAGE_ACCOUNT_NAME
-ARG STORAGE_ACCOUNT_KEY
-
-# Set environment variables
-ENV AZURE_DATABASE_URL=$DATABASE_URL
-ENV AZURE_COMPUTER_VISION_KEY=$COMPUTER_VISION_KEY
-ENV AZURE_COMPUTER_VISION_ENDPOINT=$COMPUTER_VISION_ENDPOINT
-ENV AZURE_STORAGE_ACCOUNT_NAME=$MY_STORAGE_ACCOUNT_NAME
-ENV AZURE_STORAGE_ACCOUNT_KEY=$STORAGE_ACCOUNT_KEY
-
 # Copy entrypoint script and prisma schema
 COPY prisma prisma
 COPY entrypoint.sh ./
@@ -46,11 +32,6 @@ RUN chmod +x ./entrypoint.sh
 RUN npm i -g prisma
 
 ENV NODE_ENV production
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-USER nextjs
 
 COPY --from=builder /app/public ./public
 

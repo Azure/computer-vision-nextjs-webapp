@@ -87,10 +87,10 @@ Prisma schema loaded from prisma/schema.prisma
 
 ✔ Generated Prisma Client (5.1.1 | library) to ./node_modules/@prisma/client in 78ms
 You can now start using Prisma Client in your code. Reference: https://pris.ly/d/client
-```
+\`\`\`
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
-```
+\`\`\`
 Attention: Next.js now collects completely anonymous telemetry regarding usage.
 This information is used to shape Next.js' roadmap and prioritize features.
 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
@@ -220,11 +220,11 @@ Step 29/29 : CMD ["node", "server.js"]
 Removing intermediate container d6d62d34dcea
  ---> ac777fcd7840
 Successfully built ac777fcd7840
-Successfully tagged ca0e09205e8dacr.azurecr.io/cndbcontainerapp11:20230810111209328146
+Successfully tagged ca0e09205e8dacr.azurecr.io/$MY_CONTAINER_APP_NAME:20230810111209328146
 2023/08/10 15:14:53 Successfully executed container: build
 2023/08/10 15:14:53 Executing step ID: push. Timeout(sec): 3600, Working directory: '', Network: ''
-2023/08/10 15:14:53 Pushing image: ca0e09205e8dacr.azurecr.io/cndbcontainerapp11:20230810111209328146, attempt 1
-The push refers to repository [ca0e09205e8dacr.azurecr.io/cndbcontainerapp11]
+2023/08/10 15:14:53 Pushing image: ca0e09205e8dacr.azurecr.io/$MY_CONTAINER_APP_NAME:20230810111209328146, attempt 1
+The push refers to repository [ca0e09205e8dacr.azurecr.io/$MY_CONTAINER_APP_NAME]
 09769128f8fc: Preparing
 756f2d9fbd26: Preparing
 f888c6bb2d3e: Preparing
@@ -263,7 +263,7 @@ f888c6bb2d3e: Pushed
 e208ee5f0fef: Pushed
 77967e5b75ee: Pushed
 20230810111209328146: digest: sha256:8249e74ca883b2e83c49d8ac62d9d1dad91bfa9c9f288183ea1cf0903610a6f6 size: 3242
-2023/08/10 15:15:13 Successfully pushed image: ca0e09205e8dacr.azurecr.io/cndbcontainerapp11:20230810111209328146
+2023/08/10 15:15:13 Successfully pushed image: ca0e09205e8dacr.azurecr.io/$MY_CONTAINER_APP_NAME:20230810111209328146
 2023/08/10 15:15:13 Step ID: build marked as successful (elapsed time in seconds: 133.415554)
 2023/08/10 15:15:13 Populating digests for step ID: build...
 2023/08/10 15:15:14 Successfully populated digests for step ID: build
@@ -272,7 +272,7 @@ e208ee5f0fef: Pushed
 2023/08/10 15:15:14 
 - image:
     registry: ca0e09205e8dacr.azurecr.io
-    repository: cndbcontainerapp11
+    repository: $MY_CONTAINER_APP_NAME
     tag: "20230810111209328146"
     digest: sha256:8249e74ca883b2e83c49d8ac62d9d1dad91bfa9c9f288183ea1cf0903610a6f6
   runtime-dependency:
@@ -283,16 +283,16 @@ e208ee5f0fef: Pushed
   git: {}
 
 Run ID: cf1 was successful after 3m3s
-Creating Containerapp cndbcontainerapp11 in resource group cn-test3
+Creating Containerapp $MY_CONTAINER_APP_NAME in resource group $MY_RESOURCE_GROUP_NAME
 Adding registry password as a secret with name "ca0e09205e8dacrazurecrio-ca0e09205e8dacr"
 
-Container app created. Access your app at https://cndbcontainerapp11.kindocean-a506af76.westus.azurecontainerapps.io/
+Container app created. Access your app at https://$MY_CONTAINER_APP_NAME.kindocean-a506af76.$MY_LOCATION.azurecontainerapps.io/
 
 
-Your container app cndbcontainerapp11 has been created and deployed! Congrats! 
+Your container app $MY_CONTAINER_APP_NAME has been created and deployed! Congrats! 
 
-Browse to your container app at: http://cndbcontainerapp11.kindocean-a506af76.westus.azurecontainerapps.io 
+Browse to your container app at: http://$MY_CONTAINER_APP_NAME.kindocean-a506af76.$MY_LOCATION.azurecontainerapps.io 
 
-Stream logs for your container with: az containerapp logs show -n cndbcontainerapp11 -g cn-test3 
+Stream logs for your container with: az containerapp logs show -n $MY_CONTAINER_APP_NAME -g $MY_RESOURCE_GROUP_NAME 
 
-See full output using: az containerapp show -n cndbcontainerapp11 -g cn-test3 
+See full output using: az containerapp show -n $MY_CONTAINER_APP_NAME -g $MY_RESOURCE_GROUP_NAME 
