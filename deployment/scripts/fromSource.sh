@@ -10,6 +10,10 @@ export MY_COMPUTER_VISION_NAME=mycomputervisionname
 export MY_CONTAINER_APP_NAME=mycontainerapp
 export MY_CONTAINER_APP_ENV_NAME=mycontainerappenv
 
+# Repo
+git clone https://github.com/ralphr123/cn-app.git
+cd cn-app
+
 # Resource group
 az group create --name $MY_RESOURCE_GROUP_NAME --location $MY_LOCATION
 
@@ -69,6 +73,8 @@ az containerapp up \
     AZURE_STORAGE_ACCOUNT_NAME=$MY_STORAGE_ACCOUNT_NAME \
     AZURE_STORAGE_ACCOUNT_KEY=$STORAGE_ACCOUNT_KEY
 
+# Show result
+az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE_GROUP_NAME
 
 # Container app IP address
 export CONTAINER_APP_IP=$(az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE_GROUP_NAME --query "properties.outboundIpAddresses[0]" --output tsv)
