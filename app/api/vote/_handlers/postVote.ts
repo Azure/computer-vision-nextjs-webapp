@@ -27,8 +27,8 @@ export const postVote = async (req: NextRequest) => {
 
     if (!animal) {
       return generateApiResponse({
-        status: 500,
-        error: 'Could not identify a cat or dog in the provided image.',
+        status: 400,
+        error: 'Could not detect cat or dog in the provided image.',
       });
     }
 
@@ -45,11 +45,11 @@ export const postVote = async (req: NextRequest) => {
       data: { vote },
     });
   } catch (error) {
-    const errorMessage = logErrorMessage({
+    logErrorMessage({
       message: 'Error signing up.',
       error,
     });
 
-    return generateApiResponse({ status: 500, error: errorMessage });
+    return generateApiResponse({ status: 500, error: 'Something went wrong.' });
   }
 };

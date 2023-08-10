@@ -52,8 +52,7 @@ export function VoteUploader({ imageUrl, userId }: Props) {
         },
       });
     } catch (e) {
-      console.error(e);
-      showToast({ type: 'danger', text: 'Error casting vote.' });
+      showToast({ type: 'danger', text: `Error casting vote: ${e}` });
     }
 
     setIsLoading(false);
