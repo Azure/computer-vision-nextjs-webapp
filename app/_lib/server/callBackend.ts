@@ -18,9 +18,7 @@ export const callBackend = async <ReturnType, Body = {}, QueryParams extends Rec
   params: Props<QueryParams, Body>,
 ) => {
   const { url, method, queryParams } = params;
-
   const urlWithParams = queryParams ? addSearchParams(url, queryParams) : url;
-
   let res;
 
   if (method === 'GET' || method === 'DELETE') {

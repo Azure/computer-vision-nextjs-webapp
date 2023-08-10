@@ -36,7 +36,7 @@ export const ToastProvider = ({ children }: Props) => {
     // Clear toast after 5 seconds
     setTimeout(() => {
       setToastOptions(undefined);
-    }, 5 * 1000);
+    }, 8 * 1000);
   };
 
   return (
