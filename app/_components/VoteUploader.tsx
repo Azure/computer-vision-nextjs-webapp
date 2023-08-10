@@ -60,7 +60,7 @@ export function VoteUploader({ imageUrl, userId }: Props) {
   };
 
   return imageUrl ? (
-    <Image src={imageUrl} alt="Voting image" className="h-auto w-auto max-w-xs sm:max-w-md" />
+    <Image src={imageUrl} alt="Voting image" className="sm:max-h-md h-auto w-auto max-w-xs" />
   ) : (
     <UploadInput file={imageFile} onChangeFile={onUploadImage} className="!mt-5" isLoading={isLoading} />
   );
