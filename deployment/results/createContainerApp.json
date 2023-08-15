@@ -1,0 +1,103 @@
+{
+  "id": "/subscriptions/fake3265-2f64-47a4-8df4-7e41ab70c8dh/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.App/containerapps/$MY_CONTAINER_APP_NAME",
+  "identity": {
+    "type": "None"
+  },
+  "location": "West US",
+  "name": "$MY_CONTAINER_APP_NAME",
+  "properties": {
+    "configuration": {
+      "activeRevisionsMode": "Single",
+      "dapr": null,
+      "ingress": {
+        "allowInsecure": false,
+        "clientCertificateMode": null,
+        "corsPolicy": null,
+        "customDomains": null,
+        "exposedPort": 0,
+        "external": true,
+        "fqdn": "$MY_CONTAINER_APP_NAME.kindocean-a506af76.$MY_LOCATION.azurecontainerapps.io",
+        "ipSecurityRestrictions": null,
+        "stickySessions": null,
+        "targetPort": 3000,
+        "traffic": [
+          {
+            "latestRevision": true,
+            "weight": 100
+          }
+        ],
+        "transport": "Auto"
+      },
+      "maxInactiveRevisions": null,
+      "registries": null,
+      "secrets": null,
+      "service": null
+    },
+    "customDomainVerificationId": "06C64CD176439F8B6CCBBE1B531758828A5CACEABFB30B4DC9750641532924F6",
+    "environmentId": "/subscriptions/fake3265-2f64-47a4-8df4-7e41ab70c8dh/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.App/managedEnvironments/$MY_CONTAINER_APP_ENV_NAME",
+    "eventStreamEndpoint": "https://$MY_LOCATION.azurecontainerapps.dev/subscriptions/eb9d8265-2f64-47a4-8df4-7e41db70c8d8/resourceGroups/$MY_RESOURCE_GROUP_NAME/containerApps/$MY_CONTAINER_APP_NAME/eventstream",
+    "latestReadyRevisionName": "$MY_CONTAINER_APP_NAME--jl6fh75",
+    "latestRevisionFqdn": "$MY_CONTAINER_APP_NAME--jl6fh75.kindocean-a506af76.$MY_LOCATION.azurecontainerapps.io",
+    "latestRevisionName": "$MY_CONTAINER_APP_NAME--jl6fh75",
+    "managedEnvironmentId": "/subscriptions/eb9d8265-2f64-47a4-8df4-7e41db70c8d8/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.App/managedEnvironments/$MY_CONTAINER_APP_ENV_NAME",
+    "outboundIpAddresses": ["20.237.221.47"],
+    "provisioningState": "Succeeded",
+    "runningStatus": "Running",
+    "template": {
+      "containers": [
+        {
+          "env": [
+            {
+              "name": "AZURE_DATABASE_URL",
+              "value": "$DATABASE_URL"
+            },
+            {
+              "name": "AZURE_COMPUTER_VISION_KEY",
+              "value": "$COMPUTER_VISION_KEY"
+            },
+            {
+              "name": "AZURE_COMPUTER_VISION_ENDPOINT",
+              "value": "$COMPUTER_VISION_ENDPOINT"
+            },
+            {
+              "name": "AZURE_STORAGE_ACCOUNT_NAME",
+              "value": "$MY_STORAGE_ACCOUNT_NAME"
+            },
+            {
+              "name": "AZURE_STORAGE_ACCOUNT_KEY",
+              "value": "$STORAGE_ACCOUNT_KEY"
+            }
+          ],
+          "image": "ralphr123/cn-app",
+          "name": "$MY_CONTAINER_APP_NAME",
+          "resources": {
+            "cpu": 0.5,
+            "ephemeralStorage": "2Gi",
+            "memory": "1Gi"
+          }
+        }
+      ],
+      "initContainers": null,
+      "revisionSuffix": "",
+      "scale": {
+        "maxReplicas": 10,
+        "minReplicas": null,
+        "rules": null
+      },
+      "serviceBinds": null,
+      "terminationGracePeriodSeconds": null,
+      "volumes": null
+    },
+    "workloadProfileName": null
+  },
+  "resourceGroup": "$MY_RESOURCE_GROUP_NAME",
+  "systemData": {
+    "createdAt": "2023-08-10T21:50:07.2125698",
+    "createdBy": "username@domain.com",
+    "createdByType": "User",
+    "lastModifiedAt": "2023-08-10T21:50:07.2125698",
+    "lastModifiedBy": "username@domain.com",
+    "lastModifiedByType": "User"
+  },
+  "type": "Microsoft.App/containerApps"
+}
