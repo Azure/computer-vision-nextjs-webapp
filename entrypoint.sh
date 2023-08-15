@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Add environment variables to .env file for next.js runtime
+cat > .env <<EOL
+AZURE_DATABASE_URL=${AZURE_DATABASE_URL}
+AZURE_COMPUTER_VISION_KEY=${AZURE_COMPUTER_VISION_KEY}
+AZURE_COMPUTER_VISION_ENDPOINT=${AZURE_COMPUTER_VISION_ENDPOINT}
+AZURE_STORAGE_ACCOUNT_NAME=${AZURE_STORAGE_ACCOUNT_NAME}
+AZURE_STORAGE_ACCOUNT_KEY=${AZURE_STORAGE_ACCOUNT_KEY}
+EOL
+
+# Apply the database schema on remote
+prisma db push --skip-generate
+
+exec "$@"

@@ -1,0 +1,13 @@
+{
+  "connectionString": "postgresql://$MY_DATABASE_USERNAME:$MY_DATABASE_PASSWORD@$MY_DATABASE_NAME.postgres.database.azure.com/flexibleserverdb?sslmode=require",
+  "databaseName": "$MY_DATABASE_NAME",
+  "firewallName": "FirewallIPAddress_2023-8-10_10-53-21",
+  "host": "$MY_DATABASE_NAME.postgres.database.azure.com",
+  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.DBforPostgreSQL/flexibleServers/$MY_DATABASE_NAME",
+  "location": "$MY_LOCATION",
+  "password": "$MY_DATABASE_PASSWORD",
+  "resourceGroup": "$MY_RESOURCE_GROUP_NAME",
+  "skuname": "Standard_B1ms",
+  "username": "$MY_DATABASE_USERNAME",
+  "version": "15"
+}

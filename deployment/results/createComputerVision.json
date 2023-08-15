@@ -1,0 +1,134 @@
+{
+  "etag": "\"090ac83c-0000-0700-0000-64d4fcd80000\"",
+  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.CognitiveServices/accounts/$MY_COMPUTER_VISION_NAME",
+  "identity": null,
+  "kind": "ComputerVision",
+  "location": "$MY_LOCATION",
+  "name": "$MY_COMPUTER_VISION_NAME",
+  "properties": {
+    "allowedFqdnList": null,
+    "apiProperties": null,
+    "callRateLimit": {
+      "count": null,
+      "renewalPeriod": null,
+      "rules": [
+        {
+          "count": 30.0,
+          "dynamicThrottlingEnabled": true,
+          "key": "vision.recognizeText",
+          "matchPatterns": [
+            {
+              "method": "POST",
+              "path": "vision/recognizeText"
+            },
+            {
+              "method": "GET",
+              "path": "vision/textOperations/*"
+            },
+            {
+              "method": "*",
+              "path": "vision/read/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        },
+        {
+          "count": 15.0,
+          "dynamicThrottlingEnabled": true,
+          "key": "vision",
+          "matchPatterns": [
+            {
+              "method": "*",
+              "path": "vision/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        },
+        {
+          "count": 500.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "container.billing",
+          "matchPatterns": [
+            {
+              "method": "*",
+              "path": "billing/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 10.0
+        },
+        {
+          "count": 20.0,
+          "dynamicThrottlingEnabled": true,
+          "key": "default",
+          "matchPatterns": [
+            {
+              "method": "*",
+              "path": "*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "name": "DynamicThrottling",
+        "value": null
+      },
+      {
+        "name": "VirtualNetworks",
+        "value": null
+      },
+      {
+        "name": "Container",
+        "value": "ComputerVision.VideoAnalytics,ComputerVision.ComputerVisionRead,ComputerVision.ocr,ComputerVision.readfile,ComputerVision.readfiledsd,ComputerVision.recognizetext,ComputerVision.ComputerVision,ComputerVision.ocrlayoutworker,ComputerVision.ocrcontroller,ComputerVision.ocrdispatcher,ComputerVision.ocrbillingprocessor,ComputerVision.ocranalyzer,ComputerVision.ocrpagesplitter,ComputerVision.ocrapi,ComputerVision.ocrengineworker"
+      }
+    ],
+    "customSubDomainName": null,
+    "dateCreated": "2023-08-10T15:06:00.4272845Z",
+    "deletionDate": null,
+    "disableLocalAuth": null,
+    "dynamicThrottlingEnabled": null,
+    "encryption": null,
+    "endpoint": "https://$MY_LOCATION.api.cognitive.microsoft.com/",
+    "endpoints": {
+      "Computer Vision": "https://$MY_LOCATION.api.cognitive.microsoft.com/",
+      "Container": "https://$MY_LOCATION.api.cognitive.microsoft.com/"
+    },
+    "internalId": "93645816f9594fe49a8f4023c0bf34b4",
+    "isMigrated": false,
+    "migrationToken": null,
+    "networkAcls": null,
+    "privateEndpointConnections": [],
+    "provisioningState": "Succeeded",
+    "publicNetworkAccess": "Enabled",
+    "quotaLimit": null,
+    "restore": null,
+    "restrictOutboundNetworkAccess": null,
+    "scheduledPurgeDate": null,
+    "skuChangeInfo": null,
+    "userOwnedStorage": null
+  },
+  "resourceGroup": "$MY_RESOURCE_GROUP_NAME",
+  "sku": {
+    "capacity": null,
+    "family": null,
+    "name": "S1",
+    "size": null,
+    "tier": null
+  },
+  "systemData": {
+    "createdAt": "2023-08-10T15:06:00.107300+00:00",
+    "createdBy": "username@domain.com",
+    "createdByType": "User",
+    "lastModifiedAt": "2023-08-10T15:06:00.107300+00:00",
+    "lastModifiedBy": "username@domain.com",
+    "lastModifiedByType": "User"
+  },
+  "tags": null,
+  "type": "Microsoft.CognitiveServices/accounts"
+}
