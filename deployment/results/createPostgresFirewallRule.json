@@ -1,0 +1,9 @@
+{
+  "endIpAddress": "20.237.221.47",
+  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.DBforPostgreSQL/flexibleServers/$MY_DATABASE_SERVER_NAME/firewallRules/allow-container-app",
+  "name": "allow-container-app",
+  "resourceGroup": "$MY_RESOURCE_GROUP_NAME",
+  "startIpAddress": "20.237.221.47",
+  "systemData": null,
+  "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules"
+}
