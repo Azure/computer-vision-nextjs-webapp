@@ -44,7 +44,7 @@ export default async function Home({ searchParams: { uid } }: Props) {
   }
 
   const percentCatVotes = Math.round((numCatVotes / (numCatVotes + numDogVotes)) * 100) || 0;
-  const percentDogVotes = 100 - percentCatVotes || 0;
+  const percentDogVotes = 100 - (percentCatVotes || 100);
   const defaultWidth = !percentCatVotes && !percentDogVotes ? 50 : 0;
 
   return (
