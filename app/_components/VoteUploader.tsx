@@ -13,10 +13,9 @@ import { v4 as uuid } from 'uuid';
 
 type Props = {
   userId: string;
-  imageUrl?: string;
 };
 
-export function VoteUploader({ imageUrl, userId }: Props) {
+export function VoteUploader({ userId }: Props) {
   const showToast = useToast();
   const router = useRouter();
 
@@ -55,13 +54,8 @@ export function VoteUploader({ imageUrl, userId }: Props) {
       showToast({ type: 'danger', text: `Error casting vote: ${e}` });
     }
 
-    setIsLoading(false);
     router.refresh();
   };
 
-  return imageUrl ? (
-    <Image src={imageUrl} alt="Voting image" className="sm:max-h-md h-auto w-auto max-w-xs" />
-  ) : (
-    <UploadInput file={imageFile} onChangeFile={onUploadImage} className="!mt-5" isLoading={isLoading} />
-  );
+  return <UploadInput file={imageFile} onChangeFile={onUploadImage} className="!mt-5" isLoading={isLoading} />;
 }

@@ -31,12 +31,11 @@ export function RescindVoteBtn({ voteId }: Props) {
       showToast({ type: 'danger', text: 'Error rescinding vote.' });
     }
 
-    setIsLoading(false);
     router.refresh();
   };
 
   return (
-    <button onClick={onRescindVote} className="btn-primary btn w-36">
+    <button onClick={onRescindVote} className="btn btn-primary w-36">
       {isLoading ? <Spinner size="sm" /> : <>Rescind vote</>}
     </button>
   );

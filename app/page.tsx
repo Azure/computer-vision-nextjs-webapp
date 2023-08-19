@@ -4,6 +4,7 @@ import { RescindVoteBtn } from './_components/RescindVoteBtn';
 import { SignOutButton } from './_components/SignOutButton';
 import { ThemeSelector } from './_components/ThemeSelector';
 import { redirect } from 'next/navigation';
+import { Image } from './_components/Image';
 
 type Props = {
   searchParams: { uid?: string };
@@ -29,11 +30,7 @@ export default async function Home({ searchParams: { uid } }: Props) {
   }
 
   // Get user vote
-  const vote = await prisma.vote.findUnique({
-    where: {
-      userId: uid,
-    },
-  });
+  let vote;
 
   // Count vote distribution
   const votes = await prisma.vote.findMany();
@@ -42,7 +39,9 @@ export default async function Home({ searchParams: { uid } }: Props) {
     percentCatVotes = 50,
     percentDogVotes = 50;
 
-  for (const { animal } of votes) {
+  for (let i = 0; i < votes.length; i++) {
+    const { animal, userId } = votes[i];
+    if (userId === uid) vote = votes[i];
     if (animal === 'cat') numCatVotes++;
     if (animal === 'dog') numDogVotes++;
   }
@@ -59,7 +58,10 @@ export default async function Home({ searchParams: { uid } }: Props) {
             <div className="text-4xl font-light">Hi {user.firstName}.</div>
             <div className="text-xl">Vote for Cat (or Dog).</div>
             <div className="text-xl">Vote by uploading an image of a cat or dog.</div>
-            <VoteUploader imageUrl={vote?.blobImageUrl} userId={user.id} />
+            {vote?.blobImageUrl && (
+              <Image src={vote?.blobImageUrl} alt="Voting image" className="sm:max-h-md h-auto w-auto max-w-xs" />
+            )}
+            {!vote && <VoteUploader userId={user.id} />}
             {vote && <div className="text-xl">You have voted for &quot;{vote.animal}&quot;.</div>}
             {vote && <RescindVoteBtn voteId={vote.id} />}
           </div>
