@@ -2,45 +2,39 @@
 
 In this guide, we'll be walking through deploying the necessary resources for a web app that allows users to cast votes using their name, email and an image. Users can vote for their preference of cat or dog, using an image of a cat or a dog that will be analyzed by our infrastructure. For this to work, we will be deploying resources across several different Azure services:
 
-* **Azure Storage Account** to store the images
-* **Azure Database for PostgreSQL** to store users and votes
-* **Azure Computer Vision** to analyze the images for cats or dogs
-* **Azure Container App** to deploy our code
+- **Azure Storage Account** to store the images
+- **Azure Database for PostgreSQL** to store users and votes
+- **Azure Computer Vision** to analyze the images for cats or dogs
+- **Azure Container App** to deploy our code
+
+Note: If you've never created a Computer Vision resource before, you will not be able to create one using the Azure CLI. You must create your first Computer Vision resource from the Azure portal to review and acknowledge the Responsible AI terms and conditions. You can do so here: [Create a Computer Vision Resource](https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision). After that, you can create subsequent resources using any deployment tool (SDK, CLI, or ARM template, etc) under the same Azure subscription.
+
+## Define Environment Variables
+
+The first step in this tutorial is to define environment variables. **Replace the values on the right with your own unique values.** These values will be used throughout the tutorial to create resources and configure the application. Use lowercase and no special characters for the storage account name.
+
+```plaintext
+export MY_RESOURCE_GROUP_NAME=<your resource group name>
+export MY_LOCATION=westus
+export MY_STORAGE_ACCOUNT_NAME=<your storage account name>
+export MY_DATABASE_SERVER_NAME=<your database server name>
+export MY_DATABASE_NAME=<your database name>
+export MY_DATABASE_USERNAME=<your database username>
+export MY_DATABASE_PASSWORD=<your database password>
+export MY_COMPUTER_VISION_NAME=<your computer vision resource name>
+export MY_CONTAINER_APP_NAME=<your container app name>
+export MY_CONTAINER_APP_ENV_NAME=<your container app environment name>
+```
 
 ## Clone the sample repository
 
 First, we're going to clone this repository onto our local machines. This will provide the starter code required to provide the functionality for the simple application outlined above. We can clone with a simple git command.
 
-**With HTTPS**
-
 ```bash
-git clone https://github.com/ralphr123/cn-app.git
-```
-
-**With SSH**
-
-```bash
-git clone git@github.com:ralphr123/cn-app.git
+git clone https://github.com/Azure/computer-vision-nextjs-webapp.git
 ```
 
 Once cloned, navigate to the root of the repo in your terminal. To preserve saved environment variables, it's important that this terminal window stays open for the duration of the deployment.
-
-## Define Environment Variables
-
-The first step in this tutorial is to define environment variables. Replace the values with your own.
-
-```bash
-export MY_RESOURCE_GROUP_NAME=myresourcegroup
-export MY_LOCATION=westus
-export MY_STORAGE_ACCOUNT_NAME=mystorageaccount
-export $MY_DATABASE_SERVER_NAME=mydatabaseserver
-export $MY_DATABASE_NAME=mydatabase
-export MY_DATABASE_USERNAME=mydatabaseusername
-export MY_DATABASE_PASSWORD=mydatabasepassword
-export MY_COMPUTER_VISION_NAME=mycomputervisionname
-export MY_CONTAINER_APP_NAME=mycontainerapp
-export MY_CONTAINER_APP_ENV_NAME=mycontainerappenv
-```
 
 ## Login to Azure using the CLI
 
@@ -56,6 +50,7 @@ az group create --name $MY_RESOURCE_GROUP_NAME --location $MY_LOCATION
 
 Results:
 
+<!--expected_similarity=0.5-->
 ```json
 {
   "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME",
@@ -80,6 +75,7 @@ az storage account create --name $MY_STORAGE_ACCOUNT_NAME --resource-group $MY_R
 
 Results:
 
+<!--expected_similarity=0.5-->
 ```json
 {
   "accessTier": "Hot",
@@ -189,6 +185,7 @@ az storage container create --name images --account-name $MY_STORAGE_ACCOUNT_NAM
 
 Results:
 
+<!--expected_similarity=0.5-->
 ```json
 {
   "created": true
@@ -227,6 +224,7 @@ az postgres flexible-server create \
 
 Results:
 
+<!--expected_similarity=0.5-->
 ```json
 {
   "connectionString": "postgresql://$MY_DATABASE_USERNAME:$MY_DATABASE_PASSWORD@$MY_DATABASE_NAME.postgres.database.azure.com/flexibleserverdb?sslmode=require",
@@ -268,6 +266,7 @@ az cognitiveservices account create \
 
 Results:
 
+<!--expected_similarity=0.5-->
 ```json
 {
   "etag": "\"090ac83c-0000-0700-0000-64d4fcd80000\"",
@@ -403,7 +402,6 @@ Results:
   "tags": null,
   "type": "Microsoft.CognitiveServices/accounts"
 }
-
 ```
 
 To access our computer vision resource, we need both the endpoint and the key. With the Azure CLI, we have access to two `az cognitiveservices account` commands: `show` and `keys list`, which give us what we need.
@@ -445,6 +443,7 @@ az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE
 
 Results:
 
+<!--expected_similarity=0.5-->
 ```json
 {
   "id": "/subscriptions/eb9d8265-2f64-47a4-8df4-7e41db70c8d8/resourceGroups/cn-test3/providers/Microsoft.App/containerapps/cntestcontainerapp17",
@@ -549,7 +548,6 @@ Results:
   },
   "type": "Microsoft.App/containerApps"
 }
-
 ```
 
 ## Create a database firewall rule
@@ -573,6 +571,7 @@ az postgres flexible-server firewall-rule create \
 
 Results:
 
+<!--expected_similarity=0.5-->
 ```json
 {
   "endIpAddress": "20.237.221.47",
@@ -617,7 +616,7 @@ That's it! Feel free to access the newly deployed web app in your browser using 
 
 ## Next Steps
 
-* [Azure Container Apps documentation](https://learn.microsoft.com/en-us/azure/container-apps/)
-* [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/)
-* [Azure Blob Storage documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/)
-* [Azure Computer (AI) Vision Documentation](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/)
+- [Azure Container Apps documentation](https://learn.microsoft.com/en-us/azure/container-apps/)
+- [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/)
+- [Azure Blob Storage documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/)
+- [Azure Computer (AI) Vision Documentation](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/)
