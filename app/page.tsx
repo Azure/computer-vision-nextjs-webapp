@@ -32,10 +32,8 @@ export default async function Home({ searchParams: { uid } }: Props) {
   let vote;
 
   const votes = await prisma.vote.findMany();
-  let numCatVotes = 0,
-    numDogVotes = 0,
-    percentCatVotes = 50,
-    percentDogVotes = 50;
+  let numCatVotes = 0;
+  let numDogVotes = 0;
 
   // Count vote distribution & find user's vote
   for (let i = 0; i < votes.length; i++) {
@@ -45,8 +43,9 @@ export default async function Home({ searchParams: { uid } }: Props) {
     if (animal === 'dog') numDogVotes++;
   }
 
-  percentCatVotes = Math.round((numCatVotes / (numCatVotes + numDogVotes)) * 100) || 0;
-  percentDogVotes = 100 - percentCatVotes || 0;
+  const percentCatVotes = Math.round((numCatVotes / (numCatVotes + numDogVotes)) * 100) || 0;
+  const percentDogVotes = 100 - percentCatVotes || 0;
+  const defaultWidth = !percentCatVotes && !percentDogVotes ? 50 : 0;
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start overflow-y-auto p-8 ">
@@ -78,13 +77,13 @@ export default async function Home({ searchParams: { uid } }: Props) {
             <div className="!mt-5 flex w-full overflow-hidden rounded-3xl">
               <div
                 className="flex h-10 items-center justify-center overflow-hidden bg-blue-400 text-sm"
-                style={{ width: `${percentCatVotes || 50}%` }}
+                style={{ width: `${percentCatVotes || defaultWidth}%` }}
               >
                 {percentCatVotes}%
               </div>
               <div
                 className="flex h-10 items-center justify-center overflow-hidden bg-orange-400 text-sm"
-                style={{ width: `${percentDogVotes || 50}%` }}
+                style={{ width: `${percentDogVotes || defaultWidth}%` }}
               >
                 {percentDogVotes}%
               </div>
