@@ -10,12 +10,13 @@ import { signIn } from '@/_lib/client/signIn';
 import { callBackend } from '@/_lib/server/callBackend';
 import { useRouter } from 'next/navigation';
 import { useRedirectIfSignedIn } from '@/_hooks/useRedirectIfSignedIn';
+import { LoadScreen } from '@/_components/LoadScreen';
 
 export function SignupForm() {
   // Hooks
   const showToast = useToast();
   const router = useRouter();
-  useRedirectIfSignedIn();
+  const isLoadingPage = useRedirectIfSignedIn();
 
   // Form state
   const [email, setEmail] = useState<string>();
@@ -64,6 +65,8 @@ export function SignupForm() {
       setIsLoading(false);
     }
   };
+
+  if (isLoadingPage) return <LoadScreen />;
 
   return (
     <div
