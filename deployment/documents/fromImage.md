@@ -433,7 +433,7 @@ az containerapp up \
     AZURE_STORAGE_ACCOUNT_KEY=$STORAGE_ACCOUNT_KEY
 ```
 
-We can verify that the command was successfull by using:
+We can verify that the command was successful by using:
 
 ```bash
 az containerapp show --name $MY_CONTAINER_APP_NAME --resource-group $MY_RESOURCE_GROUP_NAME
