@@ -8,12 +8,13 @@ import { signIn } from '@/_lib/client/signIn';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useRedirectIfSignedIn } from '@/_hooks/useRedirectIfSignedIn';
+import { LoadScreen } from '@/_components/LoadScreen';
 
 export function SignInForm() {
   // Hooks
   const showToast = useToast();
   const router = useRouter();
-  useRedirectIfSignedIn();
+  const isLoadingPage = useRedirectIfSignedIn();
 
   // Form state
   const [email, setEmail] = useState<string>();
@@ -45,6 +46,8 @@ export function SignInForm() {
       setIsLoading(false);
     }
   };
+
+  if (isLoadingPage) return <LoadScreen />;
 
   return (
     <div className="space-y-2">
