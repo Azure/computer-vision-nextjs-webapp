@@ -41,3 +41,5 @@ next-env.d.ts
 
 .commands.*
 .vars.*
+env-variables.sh
+deployment/scripts/deployment.yaml
