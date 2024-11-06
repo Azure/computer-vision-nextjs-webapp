@@ -59,7 +59,7 @@ Results:
 <!--expected_similarity=0.5-->
 ```json
 {
-  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME",
+  "id": "/subscriptions/xxxxxxxxxxx-xxxxxxxxxxxxxxxxxxx-xxxxxxxxxx-xxxxxxxx/resourceGroups/$MY_RESOURCE_GROUP_NAME",
   "location": "$MY_LOCATION",
   "managedBy": null,
   "name": "$MY_RESOURCE_GROUP_NAME",
@@ -91,7 +91,7 @@ Results:
   "allowedCopyScope": null,
   "azureFilesIdentityBasedAuthentication": null,
   "blobRestoreStatus": null,
-  "creationTime": "2023-08-10T14:37:41.276351+00:00",
+  "creationTime": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx",
   "customDomain": null,
   "defaultToOAuthAuthentication": null,
   "dnsEndpointType": null,
@@ -106,12 +106,12 @@ Results:
       "blob": {
         "enabled": true,
         "keyType": "Account",
-        "lastEnabledTime": "2023-08-10T14:37:41.370163+00:00"
+        "lastEnabledTime": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx"
       },
       "file": {
         "enabled": true,
         "keyType": "Account",
-        "lastEnabledTime": "2023-08-10T14:37:41.370163+00:00"
+        "lastEnabledTime": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx"
       },
       "queue": null,
       "table": null
@@ -120,15 +120,15 @@ Results:
   "extendedLocation": null,
   "failoverInProgress": null,
   "geoReplicationStats": null,
-  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.Storage/storageAccounts/$MY_STORAGE_ACCOUNT_NAME",
+  "id": "/subscriptions/xxxxxxxxxxxx-xxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxx/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.Storage/storageAccounts/$MY_STORAGE_ACCOUNT_NAME",
   "identity": null,
   "immutableStorageWithVersioning": null,
   "isHnsEnabled": null,
   "isLocalUserEnabled": null,
   "isSftpEnabled": null,
   "keyCreationTime": {
-    "key1": "2023-08-10T14:37:41.370163+00:00",
-    "key2": "2023-08-10T14:37:41.370163+00:00"
+    "key1": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx",
+    "key2": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx"
   },
   "keyPolicy": null,
   "kind": "StorageV2",
@@ -235,9 +235,9 @@ Results:
 {
   "connectionString": "postgresql://$MY_DATABASE_USERNAME:$MY_DATABASE_PASSWORD@$MY_DATABASE_NAME.postgres.database.azure.com/flexibleserverdb?sslmode=require",
   "databaseName": "$MY_DATABASE_NAME",
-  "firewallName": "FirewallIPAddress_2023-8-10_10-53-21",
+  "firewallName": "FirewallIPAddress_xxxxx-xx-xx-xx-xx",
   "host": "$MY_DATABASE_NAME.postgres.database.azure.com",
-  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.DBforPostgreSQL/flexibleServers/$MY_DATABASE_NAME",
+  "id": "/subscriptions/xxxxxxxxxx-xxxxxxxxxxx-xxxxxxxxxxxx/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.DBforPostgreSQL/flexibleServers/$MY_DATABASE_NAME",
   "location": "$MY_LOCATION",
   "password": "$MY_DATABASE_PASSWORD",
   "resourceGroup": "$MY_RESOURCE_GROUP_NAME",
@@ -275,11 +275,11 @@ Results:
 <!--expected_similarity=0.5-->
 ```json
 {
-  "etag": "\"090ac83c-0000-0700-0000-64d4fcd80000\"",
-  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.CognitiveServices/accounts/$MY_COMPUTER_VISION_NAME",
+  "etag": "xxxxxxx-xxxxxx-xxxxxxx-xxxxxxxxxx",
+  "id": "/subscriptions/xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.CognitiveServices/accounts/$MY_COMPUTER_VISION_NAME",
   "identity": null,
   "kind": "ComputerVision",
-  "location": "$MY_LOCATION",
+  "location": "$REGION",
   "name": "$MY_COMPUTER_VISION_NAME",
   "properties": {
     "allowedFqdnList": null,
@@ -365,17 +365,17 @@ Results:
       }
     ],
     "customSubDomainName": null,
-    "dateCreated": "2023-08-10T15:06:00.4272845Z",
+    "dateCreated": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx",
     "deletionDate": null,
     "disableLocalAuth": null,
     "dynamicThrottlingEnabled": null,
     "encryption": null,
-    "endpoint": "https://$MY_LOCATION.api.cognitive.microsoft.com/",
+    "endpoint": "https://$REGION.api.cognitive.microsoft.com/",
     "endpoints": {
-      "Computer Vision": "https://$MY_LOCATION.api.cognitive.microsoft.com/",
-      "Container": "https://$MY_LOCATION.api.cognitive.microsoft.com/"
+      "Computer Vision": "https://$REGION.api.cognitive.microsoft.com/",
+      "Container": "https://$REGION.api.cognitive.microsoft.com/"
     },
-    "internalId": "93645816f9594fe49a8f4023c0bf34b4",
+    "internalId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "isMigrated": false,
     "migrationToken": null,
     "networkAcls": null,
@@ -398,10 +398,10 @@ Results:
     "tier": null
   },
   "systemData": {
-    "createdAt": "2023-08-10T15:06:00.107300+00:00",
+    "createdAt": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx",
     "createdBy": "username@domain.com",
     "createdByType": "User",
-    "lastModifiedAt": "2023-08-10T15:06:00.107300+00:00",
+    "lastModifiedAt": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx",
     "lastModifiedBy": "username@domain.com",
     "lastModifiedByType": "User"
   },
@@ -460,12 +460,12 @@ Results:
 <!--expected_similarity=0.5-->
 ```json
 {
-  "id": "/subscriptions/eb9d8265-2f64-47a4-8df4-7e41db70c8d8/resourceGroups/cn-test3/providers/Microsoft.App/containerapps/cntestcontainerapp17",
+  "id": "/subscriptions/xxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxxx/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.App/containerapps/$MY_CONTAINER_APP_NAME",
   "identity": {
     "type": "None"
   },
   "location": "West US",
-  "name": "cntestcontainerapp17",
+  "name": "$MY_CONTAINER_APP_NAME",
   "properties": {
     "configuration": {
       "activeRevisionsMode": "Single",
@@ -477,7 +477,7 @@ Results:
         "customDomains": null,
         "exposedPort": 0,
         "external": true,
-        "fqdn": "cntestcontainerapp17.kindocean-a506af76.westus.azurecontainerapps.io",
+        "fqdn": "$MY_CONTAINER_APP_NAME.xxxxxxx-xxxxxxxxxx.$REGION.azurecontainerapps.io",
         "ipSecurityRestrictions": null,
         "stickySessions": null,
         "targetPort": 3000,
@@ -494,14 +494,14 @@ Results:
       "secrets": null,
       "service": null
     },
-    "customDomainVerificationId": "06C64CD176439F8B6CCBBE1B531758828A5CACEABFB30B4DC9750641532924F6",
-    "environmentId": "/subscriptions/eb9d8265-2f64-47a4-8df4-7e41db70c8d8/resourceGroups/cn-test3/providers/Microsoft.App/managedEnvironments/cndbcomputervisionenv11",
-    "eventStreamEndpoint": "https://westus.azurecontainerapps.dev/subscriptions/eb9d8265-2f64-47a4-8df4-7e41db70c8d8/resourceGroups/cn-test3/containerApps/cntestcontainerapp17/eventstream",
-    "latestReadyRevisionName": "cntestcontainerapp17--jl6fh75",
-    "latestRevisionFqdn": "cntestcontainerapp17--jl6fh75.kindocean-a506af76.westus.azurecontainerapps.io",
-    "latestRevisionName": "cntestcontainerapp17--jl6fh75",
-    "managedEnvironmentId": "/subscriptions/eb9d8265-2f64-47a4-8df4-7e41db70c8d8/resourceGroups/cn-test3/providers/Microsoft.App/managedEnvironments/cndbcomputervisionenv11",
-    "outboundIpAddresses": ["20.237.221.47"],
+    "customDomainVerificationId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "environmentId": "/subscriptions/xxxxxxxx-xxxxxxxx-xxxxxxxxx-xxxxxxxxx/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.App/managedEnvironments/$MY_CONTAINER_APP_ENV_NAME",
+    "eventStreamEndpoint": "https://$REGION.azurecontainerapps.dev/subscriptions/xxxxxxxx-xxxxxxxx-xxxxxxxxx-xxxxxxxxx/resourceGroups/$MY_RESOURCE_GROUP_NAME/containerApps/$MY_CONTAINER_APP_NAME/eventstream",
+    "latestReadyRevisionName": "$MY_CONTAINER_APP_NAME-xxxxxxx",
+    "latestRevisionFqdn": "$MY_CONTAINER_APP_NAME-xxxxxxx.kindocean-xxxxxxxx.$REGION.azurecontainerapps.io",
+    "latestRevisionName": "$MY_CONTAINER_APP_NAME-xxxxxxx",
+    "managedEnvironmentId": "/subscriptions/xxxxxxxx-xxxxxxxx-xxxxxxxxx-xxxxxxxxx/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.App/managedEnvironments/$MY_CONTAINER_APP_ENV_NAME",
+    "outboundIpAddresses": ["xx.xxx.xx.xxxx"],
     "provisioningState": "Succeeded",
     "runningStatus": "Running",
     "template": {
@@ -510,27 +510,27 @@ Results:
           "env": [
             {
               "name": "AZURE_DATABASE_URL",
-              "value": "postgres://cndbadmin11:cndbscret11@cntestdb11.postgres.database.azure.com/flexibleserverdb"
+              "value": "$DATABASE_URL"
             },
             {
               "name": "AZURE_COMPUTER_VISION_KEY",
-              "value": "949ad147794046baa8fc22af832c954f"
+              "value": "$COMPUTER_VISION_KEY"
             },
             {
               "name": "AZURE_COMPUTER_VISION_ENDPOINT",
-              "value": "https://westus.api.cognitive.microsoft.com/"
+              "value": "$COMPUTER_VISION_ENDPOINT"
             },
             {
               "name": "AZURE_STORAGE_ACCOUNT_NAME",
-              "value": "cnteststorage14"
+              "value": "$MY_STORAGE_ACCOUNT_NAME"
             },
             {
               "name": "AZURE_STORAGE_ACCOUNT_KEY",
-              "value": "+b/zI8I35ZCrRgPHYsNSc2A1QiLId3aZyAoUlQboDmfVC22wPQUvus2qxqdnLcjq2+SJ7t1DxCLX+AStkCmi3Q=="
+              "value": "$STORAGE_ACCOUNT_KEY"
             }
           ],
-          "image": "ralphr123/cn-app",
-          "name": "cntestcontainerapp17",
+          "image": "xxxxxx/xx-xxxx",
+          "name": "$MY_CONTAINER_APP_NAME",
           "resources": {
             "cpu": 0.5,
             "ephemeralStorage": "2Gi",
@@ -551,13 +551,13 @@ Results:
     },
     "workloadProfileName": null
   },
-  "resourceGroup": "cn-test3",
+  "resourceGroup": "$MY_RESOURCE_GROUP_NAME",
   "systemData": {
-    "createdAt": "2023-08-10T21:50:07.2125698",
-    "createdBy": "ralph.rouhana@gmail.com",
+    "createdAt": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx",
+    "createdBy": "username@domain.com",
     "createdByType": "User",
-    "lastModifiedAt": "2023-08-10T21:50:07.2125698",
-    "lastModifiedBy": "ralph.rouhana@gmail.com",
+    "lastModifiedAt": "xxxx-xx-xxxxx:xx:xx.xxxxxx+xx:xx",
+    "lastModifiedBy": "username@domain.com",
     "lastModifiedByType": "User"
   },
   "type": "Microsoft.App/containerApps"
@@ -588,11 +588,11 @@ Results:
 <!--expected_similarity=0.5-->
 ```json
 {
-  "endIpAddress": "20.237.221.47",
-  "id": "/subscriptions/ab9d8365-2f65-47a4-8df4-7e40db70c8d2/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.DBforPostgreSQL/flexibleServers/$MY_DATABASE_SERVER_NAME/firewallRules/allow-container-app",
+  "endIpAddress": "xx.xxx.xx.xxx",
+  "id": "/subscriptions/xxxxxxxx-xxxxxxxx-xxxxxxx-xxxxxxx/resourceGroups/$MY_RESOURCE_GROUP_NAME/providers/Microsoft.DBforPostgreSQL/flexibleServers/$MY_DATABASE_SERVER_NAME/firewallRules/allow-container-app",
   "name": "allow-container-app",
   "resourceGroup": "$MY_RESOURCE_GROUP_NAME",
-  "startIpAddress": "20.237.221.47",
+  "startIpAddress": "xx.xxx.xx.xxx",
   "systemData": null,
   "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules"
 }
